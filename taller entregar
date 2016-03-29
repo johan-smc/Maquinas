@@ -7,8 +7,8 @@ NA:
 NB: 
 	DB 9
 
-suma:
-	mov a,[NA]
+suma:				;funcion principal
+	mov a,[NA]           
 	mov b,[NB]
 	mov c,RESULTADO
 	mov d,232
@@ -20,11 +20,11 @@ suma:
 	HLT
 	
 
-multiplicacion:
+multiplicacion:			;multiplica dos numeros
 	push a
 	push b
 	mov c,0
-.loopa:
+.loopa:				;ciclo que decrementa un numero hasta que llegue a 0  
 	add c,a
 	dec b
 	cmp b,0
@@ -32,11 +32,11 @@ multiplicacion:
 	pop b
 	pop a
 	RET
-printNum:
+printNum:			;Imprime el numero
 	mov a,c
 	mov b,0
-	;saca la cantidad de dijitos
-.dig:
+	
+.dig:				;saca la cantidad de dijitos			
 	div 10
 	inc b
 	cmp a,0
@@ -45,8 +45,8 @@ printNum:
 	push c
 	add d,b ;pone la posicion mas adelante la cantidad de digitos 
 	push d
-	;imprime de atras al reves los digitos
-.lloop:
+	
+.lloop:					;imprime al reves los digitos			
 	div 10
 	mul 10
 	sub c,a
@@ -75,14 +75,14 @@ print:			; print(C:*from, D:*to)
 	POP B
 	POP A
 	RET
-wait:
+wait:			;Espera 10 ciclos
 	mov b,10
 .ll:
 	dec b
 	cmp b,0
 	JNZ .ll
 	RET
-clear:
+clear:			;Borra lo escrito
 .cc:
 	mov [d],' '
 	dec d
