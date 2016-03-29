@@ -35,6 +35,7 @@ multiplicacion:
 printNum:
 	mov a,c
 	mov b,0
+	;saca la cantidad de dijitos
 .dig:
 	div 10
 	inc b
@@ -42,8 +43,9 @@ printNum:
 	JNZ .dig
 	mov a,c
 	push c
-	add d,b
+	add d,b ;pone la posicion mas adelante la cantidad de digitos 
 	push d
+	;imprime de atras al reves los digitos
 .lloop:
 	div 10
 	mul 10
