@@ -1,0 +1,89 @@
+JMP suma
+RESULTADO: 
+	DB "Resultado: " 
+	DB 0	
+NA: 
+	DB 22
+NB: 
+	DB 9
+
+suma:
+	mov a,[NA]
+	mov b,[NB]
+	mov c,RESULTADO
+	mov d,232
+	call print
+	call multiplicacion
+	call printNum
+	call wait
+	call clear
+	HLT
+	
+
+multiplicacion:
+	push a
+	push b
+	mov c,0
+.loopa:
+	add c,a
+	dec b
+	cmp b,0
+	JNZ .loopa
+	pop b
+	pop a
+	RET
+printNum:
+	mov a,c
+	mov b,0
+.dig:
+	div 10
+	inc b
+	cmp a,0
+	JNZ .dig
+	mov a,c
+	push c
+	add d,b
+	push d
+.lloop:
+	div 10
+	mul 10
+	sub c,a
+	add c,'0'
+	dec d
+	mov [d],c
+	div 10
+	mov c,a
+	cmp a,0
+	JNZ .lloop
+	pop d
+	pop c
+	RET
+print:			; print(C:*from, D:*to)
+	PUSH A
+	PUSH B
+	MOV B, 0
+.loopo:
+	MOV A, [C]	; Get char from var
+	MOV [D], A	; Write to output
+	INC C
+	INC D  
+	CMP B, [C]	; Check if end
+	JNZ .loopo	; jump if not
+
+	POP B
+	POP A
+	RET
+wait:
+	mov b,10
+.ll:
+	dec b
+	cmp b,0
+	JNZ .ll
+	RET
+clear:
+.cc:
+	mov [d],' '
+	dec d
+	cmp d,231
+	JNZ .cc
+	RET
